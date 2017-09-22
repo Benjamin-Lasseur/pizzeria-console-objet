@@ -1,6 +1,6 @@
 package fr.pizzeria.dao;
 
-import fr.pizzeria.exception.DeletePizzaException;
+
 import fr.pizzeria.model.Pizza;
 
 /**Interface permettant de définir la stucture de la DAO stockant les pizzas

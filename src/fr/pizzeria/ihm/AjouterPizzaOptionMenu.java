@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImplementation;
 import fr.pizzeria.exception.SavePizzaException;
-import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.Pizza;
 
 /**Classe AjouterPizzaOptionMenu étendant la classe OptionMenu
