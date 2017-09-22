@@ -4,11 +4,11 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImplementation;
+import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
+import fr.pizzeria.ihm.ListerPizzasOptionMenu;
+import fr.pizzeria.ihm.ModifierPizzaOptionMenu;
+import fr.pizzeria.ihm.SupprimerPizzaOptionMenu;
 import fr.pizzeria.model.*;
-import ihm.AjouterPizzaOptionMenu;
-import ihm.ListerPizzasOptionMenu;
-import ihm.ModifierPizzaOptionMenu;
-import ihm.SupprimerPizzaOptionMenu;
 
 /**
  * Represente l'application controlant depuis la console
