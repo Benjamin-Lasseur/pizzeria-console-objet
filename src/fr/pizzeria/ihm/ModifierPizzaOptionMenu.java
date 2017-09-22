@@ -3,6 +3,7 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImplementation;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**Classe ModifierPizzaOptionMenu étendant la classe OptionMenu
@@ -19,10 +20,13 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 
 	//Méthode execute() affichant les informations nécessaires à la modification d'une pizza
 	@Override
-	public boolean execute() {
+	public boolean execute() throws UpdatePizzaException{
 		String code;
 		System.out.println("Quelle pizza voulez vous modifier (Entrez le code ou 99 pour abandonner)?");
 		code = sc.next();
+		if(!code.equals("99")||code.length()>3){
+			throw new UpdatePizzaException("Le code rentré n\'est pas valide");
+		}
 		if (code.equals("99")) {
 			System.out.println("Abandon");
 		} else {

@@ -3,6 +3,8 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImplementation;
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.model.Pizza;
 
 /**Classe SupprimerPizzaOptionMenu étendant la classe OptionMenu
  * Elle permet l'affichage nécessaire à la suppression d'une pizza
@@ -19,13 +21,24 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	//Méthode execute() affichant les informations nécessaires à la suppression d'une pizza
 	@Override
-	public boolean execute() {
+	public boolean execute() throws DeletePizzaException{
 		String code;
 		code = sc.next();
 		if (code.equals("99")) {
 			System.out.println("Abandon");
 		} else {
-			pizzaDao.deletePizza(code);
+			boolean codeExiste = false;
+			for (Pizza p :pizzaDao.findAllPizzas()){
+				if (code.equals(p.getCode())){
+					codeExiste=true;
+				}
+			}
+			if (codeExiste){
+				pizzaDao.deletePizza(code);
+			}else{
+				throw new DeletePizzaException("Aucune pizza ne correspond à ce code!");
+			}
+			
 
 		}
 		return false;

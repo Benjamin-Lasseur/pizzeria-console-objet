@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImplementation;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
 import fr.pizzeria.ihm.ModifierPizzaOptionMenu;
@@ -43,36 +44,41 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("4." + spom.getLibelle());
 			System.out.println("99.Quitter");
 			choix = sc.nextInt();
-			switch (choix) {
-			/** Choix 1: Afficher l'ensemble des pizzas */
-			case 1:
-				lpom.execute();
-				break;
-			/** Choix 2: Ajout d'une nouvelle pizza */
-			case 2:
-				apom.execute();
-				break;
-			// Choix 3: Mise à jour d'une pizza
-			case 3:
-				System.out.println("Mise à jour d'une pizza");
-				lpom.execute();
-				mpom.execute();
-				break;
-			// Choix 4: Suppression d'une pizza
-			case 4:
-				System.out.println("Supression d'une pizza");
-				lpom.execute();
-				System.out.println("Quelle pizza voulez vous supprimer (Entrez le code ou 99 pour abandonner)?");
-				spom.execute();
-				break;
-			/** Quitter le programme */
-			case 99:
-				System.out.println("Aurevoir \u2639");
-				continuer = false;
-				break;
-			/** Mauvaise entrée de l'utilisateur */
-			default:
-				System.out.println("Entrez un choix correct");
+			try {
+				switch (choix) {
+				/** Choix 1: Afficher l'ensemble des pizzas */
+				case 1:
+					lpom.execute();
+					break;
+				/** Choix 2: Ajout d'une nouvelle pizza */
+				case 2:
+					apom.execute();
+					break;
+				// Choix 3: Mise à jour d'une pizza
+				case 3:
+					System.out.println("Mise à jour d'une pizza");
+					lpom.execute();
+					mpom.execute();
+					break;
+				// Choix 4: Suppression d'une pizza
+				case 4:
+					System.out.println("Supression d'une pizza");
+					lpom.execute();
+					System.out.println("Quelle pizza voulez vous supprimer (Entrez le code ou 99 pour abandonner)?");
+					spom.execute();
+					break;
+				/** Quitter le programme */
+				case 99:
+					System.out.println("Aurevoir \u2639");
+					continuer = false;
+					break;
+				/** Mauvaise entrée de l'utilisateur */
+				default:
+					System.out.println("Entrez un choix correct");
+				}
+			} catch (Exception e) {
+				e.getMessage();
+				e.printStackTrace();
 			}
 		} while (continuer);
 		sc.close();

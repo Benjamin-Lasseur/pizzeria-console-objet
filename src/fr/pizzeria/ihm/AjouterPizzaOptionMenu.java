@@ -3,6 +3,8 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImplementation;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.model.Pizza;
 
 /**Classe AjouterPizzaOptionMenu étendant la classe OptionMenu
@@ -20,12 +22,15 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 
 	//Méthode execute() affichant les informations nécessaires à l'ajout d'une pizza
 	@Override
-	public boolean execute() {
+	public boolean execute() throws SavePizzaException{
 		String code;
 		String nom;
 		double prix;
 		System.out.println("Ajout d'une nouvelle pizza\nVeuillez saisir son code:");
 		code = sc.next();
+		if(code.length()>3){
+			throw new SavePizzaException("Le code de la pizza doit comporter 3 caractères maximum.");
+		}
 		System.out.println("Veuillez entrer le nom:");
 		nom = sc.next();
 		System.out.println("Veuillez entrer le prix");
