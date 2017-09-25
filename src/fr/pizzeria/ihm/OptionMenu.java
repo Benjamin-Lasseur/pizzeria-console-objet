@@ -2,7 +2,7 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import fr.pizzeria.dao.PizzaDaoImplementation;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 
 /**Classe abstraite généralisant les différentes options
@@ -15,14 +15,14 @@ public abstract class OptionMenu {
 	 * PizzaDaoImplementation pizzaDao DAO de stockage des pizzas
 	 */
 	protected Scanner sc;
-	protected PizzaDaoImplementation pizzaDao;
+	protected IPizzaDao pizzaDao;
 
 	public abstract boolean execute() throws StockageException;
 
 	public abstract String getLibelle();
 
 	//Construteur abstrait appelé depuis les classes filles
-	public OptionMenu(Scanner sc, PizzaDaoImplementation pizzaDao) {
+	public OptionMenu(Scanner sc, IPizzaDao pizzaDao) {
 		this.sc = sc;
 		this.pizzaDao = pizzaDao;
 	}

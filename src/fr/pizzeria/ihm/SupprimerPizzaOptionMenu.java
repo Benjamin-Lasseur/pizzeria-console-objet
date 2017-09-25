@@ -2,7 +2,7 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import fr.pizzeria.dao.PizzaDaoImplementation;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.model.Pizza;
 
@@ -14,7 +14,7 @@ import fr.pizzeria.model.Pizza;
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	//Construteur
-	public SupprimerPizzaOptionMenu(Scanner sc, PizzaDaoImplementation pizzaDao) {
+	public SupprimerPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao) {
 		super(sc, pizzaDao);
 		// TODO Auto-generated constructor stub
 	}
