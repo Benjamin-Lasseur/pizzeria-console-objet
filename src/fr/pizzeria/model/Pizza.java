@@ -1,4 +1,5 @@
 package fr.pizzeria.model;
+import fr.utils.*;
 
 /**
  * Classe définissant une pizza
@@ -12,11 +13,17 @@ public class Pizza {
 	/** Index de la pizza */
 	private int id;
 	/** Code de la pizza */
+	@ToString
 	private String code;
 	/** Nom de la pizza */
+	@ToString(upperCase = true)
 	private String nom;
 	/** Prix de la pizza */
+	@ToString
 	private double prix;
+	/** Categorie de la pizza */
+	@ToString
+	private CategoriePizza categorie;
 
 	/**
 	 * Constructeur
@@ -28,12 +35,13 @@ public class Pizza {
 	 * @param prix
 	 *            prix
 	 */
-	public Pizza(String code, String nom, double prix) {
+	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 		this.id = Pizza.indexId;
 		Pizza.indexId++;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
+		this.categorie = categorie;
 	}
 
 	/**
@@ -49,6 +57,12 @@ public class Pizza {
 	 */
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return StringUtils.convert(this);
+		//return code + " -> "+ nom + " (" + prix +"€) "+categorie.getType();
 	}
 
 	/**
@@ -144,5 +158,26 @@ public class Pizza {
 			return false;
 		return true;
 	}
+
+	/**
+	 * @return the categorie
+	 */
+	public CategoriePizza getCategorie() {
+		return categorie;
+	}
+
+	/**
+	 * @param categorie
+	 *            the categorie to set
+	 */
+	public void setCategorie(CategoriePizza categorie) {
+		this.categorie = categorie;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 
 }

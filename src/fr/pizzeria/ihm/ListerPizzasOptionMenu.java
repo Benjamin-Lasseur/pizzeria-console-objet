@@ -23,7 +23,7 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 	public boolean execute() {
 		System.out.println("Liste des pizzas");
 		for (Pizza p : pizzaDao.findAllPizzas()) {
-			System.out.println(p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "€)");
+			System.out.println(p.toString());
 		}
 		System.out.println();
 		return false;

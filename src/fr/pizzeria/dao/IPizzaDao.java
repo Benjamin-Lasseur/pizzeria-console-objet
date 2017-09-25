@@ -1,6 +1,8 @@
 package fr.pizzeria.dao;
 
 
+import java.util.ArrayList;
+
 import fr.pizzeria.model.Pizza;
 
 /**Interface permettant de définir la stucture de la DAO stockant les pizzas
@@ -8,7 +10,7 @@ import fr.pizzeria.model.Pizza;
  *
  */
 public interface IPizzaDao {
-	Pizza[] findAllPizzas();
+	ArrayList<Pizza> findAllPizzas();
 
 	boolean saveNewPizza(Pizza pizza);
 

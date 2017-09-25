@@ -1,5 +1,8 @@
 package fr.pizzeria.dao;
 
+import java.util.ArrayList;
+
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 /**Implementation de l'interface DAO de stockage des pizzas
@@ -9,44 +12,39 @@ import fr.pizzeria.model.Pizza;
 /** */
 public class PizzaDaoImplementation implements IPizzaDao {
 	/**Tableau stockant les pizzas*/
-	private Pizza[] tabPizza = new Pizza[8];
+	private ArrayList<Pizza> tabPizza = new ArrayList<>();
 	/**Constructeur de la DAO et ajout des pizzas initiales */
 	public PizzaDaoImplementation() {
 		super();
-		tabPizza[0] = new Pizza("PEP", "Pépéroni", 12.50);
-		tabPizza[1] = new Pizza("MAR", "Margherita", 14.00);
-		tabPizza[2] = new Pizza("REIN", "La Reine", 11.50);
-		tabPizza[3] = new Pizza("FRO", "La 4 Fromages", 12.00);
-		tabPizza[4] = new Pizza("CAN", "La Cannibale", 12.50);
-		tabPizza[5] = new Pizza("SAV", "La savoyarde", 13.00);
-		tabPizza[6] = new Pizza("ORI", "L'orientale", 13.50);
-		tabPizza[7] = new Pizza("IND", "L'indienne", 14.00);
+		tabPizza.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("REIN", "La Reine", 11.50, CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("FRO", "La 4 Fromages", 12.00, CategoriePizza.SANS_VIANDE));
+		tabPizza.add(new Pizza("CAN", "La Cannibale", 12.50,CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.VIANDE));
+		tabPizza.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.POISSON));
+		tabPizza.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.POISSON));
 	}
 
 	/**Méthode findAllPizza() retournant le tableau de pizzas */
 	@Override
-	public Pizza[] findAllPizzas() {
+	public ArrayList<Pizza> findAllPizzas() {
 		return tabPizza;
 	}
 
 	/**Méthode saveNewPizza(Pizza pizza) permettant de stocker une nouvelle pizza dans le tableau */
 	@Override
 	public boolean saveNewPizza(Pizza pizza) {
-		Pizza[] newTabPizza = new Pizza[tabPizza.length + 1];
-		for (int i = 0; i < tabPizza.length; i++) {
-			newTabPizza[i] = tabPizza[i];
-		}
-		newTabPizza[newTabPizza.length - 1] = pizza;
-		tabPizza=newTabPizza;
+		tabPizza.add(pizza);
 		return false;
 	}
 
 	/**Méthode updatePizza(String codePizza, Pizza pizza) permettant de modifier une pizza */
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
-		for (int i = 0; i<tabPizza.length; i++) {
-			if (tabPizza[i].getCode().equals(codePizza)) {
-				tabPizza[i] = pizza;
+		for (int i = 0; i<tabPizza.size(); i++) {
+			if (tabPizza.get(i).getCode().equals(codePizza)) {
+				tabPizza.set(i, pizza);
 				break;
 			}
 		}
@@ -58,20 +56,7 @@ public class PizzaDaoImplementation implements IPizzaDao {
 	public boolean deletePizza(String codePizza) {
 		for (Pizza p : tabPizza) {
 			if (p.getCode().equals(codePizza)) {
-				Pizza[] newTabPizza = new Pizza[tabPizza.length - 1];
-				int index = 0;
-				int index2 = 0;
-				while (index <= tabPizza.length - 1) {
-					if (tabPizza[index].getCode().equals(codePizza)) {
-						index++;
-					} else {
-						newTabPizza[index2] = tabPizza[index];
-						index2++;
-						index++;
-					}
-
-				}	
-				tabPizza = newTabPizza;
+				tabPizza.remove(p);
 				break;
 			}
 		}
