@@ -37,7 +37,7 @@ public class PizzeriaAdminConsoleApp {
 		do {
 			/** Premier affichage du menu au lancement de l'application */
 			System.out.println("****Pizzeria Administration****");
-			System.out.println("1." + option.get(new Integer(1)).getLibelle());
+			System.out.println("1." + option.get(new Integer(1)).getLibelle())
 			System.out.println("2." + option.get(new Integer(2)).getLibelle());
 			System.out.println("3." + option.get(new Integer(3)).getLibelle());
 			System.out.println("4." + option.get(new Integer(4)).getLibelle());
