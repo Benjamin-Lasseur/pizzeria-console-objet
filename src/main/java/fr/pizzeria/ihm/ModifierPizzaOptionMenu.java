@@ -31,7 +31,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 		if (code.length() > 3) {
 			throw new UpdatePizzaException("Le code rentré n\'est pas valide");
 		}
-		if (code.equals("99")) {
+		if ("99".equals(code)) {
 			System.out.println("Abandon");
 		} else {
 			System.out.println("Veuillez saisir le nouveau code:");

@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImplementation;
 import fr.pizzeria.ihm.*;
+import fr.pizzeria.exception.StockageException;;
 
 /**
  * Represente l'application controlant depuis la console
@@ -28,43 +29,43 @@ public class PizzeriaAdminConsoleApp {
 		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
 		// Instanciation des classes de méthodes Suppression, Modification,
 		// Ajout et Listage
-		option.put(new Integer(1), new ListerPizzasOptionMenu(sc, pizzaDao));
-		option.put(new Integer(2), new AjouterPizzaOptionMenu(sc, pizzaDao));
-		option.put(new Integer(3), new ModifierPizzaOptionMenu(sc, pizzaDao));
-		option.put(new Integer(4), new SupprimerPizzaOptionMenu(sc, pizzaDao));
+		option.put(1, new ListerPizzasOptionMenu(sc, pizzaDao));
+		option.put(2, new AjouterPizzaOptionMenu(sc, pizzaDao));
+		option.put(3, new ModifierPizzaOptionMenu(sc, pizzaDao));
+		option.put(4, new SupprimerPizzaOptionMenu(sc, pizzaDao));
 		/** Boolean pour quitter l'application */
 		boolean continuer = true;
 		do {
 			/** Premier affichage du menu au lancement de l'application */
 			System.out.println("****Pizzeria Administration****");
-			System.out.println("1." + option.get(new Integer(1)).getLibelle());
-			System.out.println("2." + option.get(new Integer(2)).getLibelle());
-			System.out.println("3." + option.get(new Integer(3)).getLibelle());
-			System.out.println("4." + option.get(new Integer(4)).getLibelle());
+			System.out.println("1." + option.get(1).getLibelle());
+			System.out.println("2." + option.get(2).getLibelle());
+			System.out.println("3." + option.get(3).getLibelle());
+			System.out.println("4." + option.get(4).getLibelle());
 			System.out.println("99.Quitter");
 			choix = sc.nextInt();
 			try {
 				switch (choix) {
 				/** Choix 1: Afficher l'ensemble des pizzas */
 				case 1:
-					option.get(new Integer(1)).execute();
+					option.get(1).execute();
 					break;
 				/** Choix 2: Ajout d'une nouvelle pizza */
 				case 2:
-					option.get(new Integer(2)).execute();
+					option.get(2).execute();
 					break;
 				// Choix 3: Mise à jour d'une pizza
 				case 3:
 					System.out.println("Mise à jour d'une pizza");
-					option.get(new Integer(1)).execute();
-					option.get(new Integer(3)).execute();
+					option.get(1).execute();
+					option.get(3).execute();
 					break;
 				// Choix 4: Suppression d'une pizza
 				case 4:
 					System.out.println("Supression d'une pizza");
-					option.get(new Integer(1)).execute();
+					option.get(1).execute();
 					System.out.println("Quelle pizza voulez vous supprimer (Entrez le code ou 99 pour abandonner)?");
-					option.get(new Integer(4)).execute();
+					option.get(4).execute();
 					break;
 				/** Quitter le programme */
 				case 99:
@@ -75,7 +76,7 @@ public class PizzeriaAdminConsoleApp {
 				default:
 					System.out.println("Entrez un choix correct");
 				}
-			} catch (Exception e) {
+			} catch (StockageException e) {
 				e.getMessage();
 				e.printStackTrace();
 			}

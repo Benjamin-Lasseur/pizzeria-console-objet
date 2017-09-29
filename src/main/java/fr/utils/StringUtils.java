@@ -13,13 +13,13 @@ public class StringUtils {
 					try {
 						returnedString += field.get(o).toString().toUpperCase() + " ";
 					} catch (IllegalAccessException e) {
-
+						e.getMessage();
 					}
 				} else {
 					try {
 						returnedString += field.get(o).toString() + " ";
 					} catch (IllegalAccessException e) {
-
+						e.getMessage();
 					}
 				}
 			}

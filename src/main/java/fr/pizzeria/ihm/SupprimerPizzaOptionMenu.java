@@ -24,7 +24,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 	public boolean execute() throws DeletePizzaException{
 		String code;
 		code = sc.next();
-		if (code.equals("99")) {
+		if ("99".equals(code)) {
 			System.out.println("Abandon");
 		} else {
 			boolean codeExiste = false;
