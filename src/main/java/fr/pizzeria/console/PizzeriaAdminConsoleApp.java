@@ -4,9 +4,14 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
 
+
 import fr.pizzeria.dao.PizzaDaoImplementation;
-import fr.pizzeria.ihm.*;
-import fr.pizzeria.exception.StockageException;;
+import fr.pizzeria.exception.StockageException;
+import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
+import fr.pizzeria.ihm.ListerPizzasOptionMenu;
+import fr.pizzeria.ihm.ModifierPizzaOptionMenu;
+import fr.pizzeria.ihm.OptionMenu;
+import fr.pizzeria.ihm.SupprimerPizzaOptionMenu;
 
 /**
  * Represente l'application controlant depuis la console
