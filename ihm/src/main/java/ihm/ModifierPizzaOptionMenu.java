@@ -2,7 +2,6 @@ package ihm;
 
 import java.util.Scanner;
 
-
 import exception.*;
 
 import model.*;
@@ -26,13 +25,10 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 	// Méthode execute() affichant les informations nécessaires à la
 	// modification d'une pizza
 	@Override
-	public boolean execute() throws UpdatePizzaException {
+	public boolean execute() throws StockageException{
 		String code;
 		System.out.println("Quelle pizza voulez vous modifier (Entrez le code ou 99 pour abandonner)?");
 		code = sc.next();
-		if (code.length() > 3) {
-			throw new UpdatePizzaException("Le code rentré n\'est pas valide");
-		}
 		if ("99".equals(code)) {
 			System.out.println("Abandon");
 		} else {
@@ -50,9 +46,9 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 				}
 				categorie = sc.next();
 			} while (!CategoriePizza.exist(categorie));
-			
-		Pizza p = new Pizza(newCode, newNom, newPrix, CategoriePizza.returnCategorie(categorie));
-		pizzaDao.updatePizza(code, p);
+
+			Pizza p = new Pizza(newCode, newNom, newPrix, CategoriePizza.returnCategorie(categorie));
+				pizzaDao.updatePizza(code, p);
 		}
 		return false;
 	}

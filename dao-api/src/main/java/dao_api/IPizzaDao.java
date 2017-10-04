@@ -4,6 +4,7 @@ package dao_api;
 
 import java.util.ArrayList;
 
+import exception.*;
 import model.Pizza;
 
 /**Interface permettant de définir la stucture de la DAO stockant les pizzas
@@ -15,8 +16,8 @@ public interface IPizzaDao {
 
 	boolean saveNewPizza(Pizza pizza);
 
-	boolean updatePizza(String codePizza, Pizza pizza);
+	boolean updatePizza(String codePizza, Pizza pizza)throws UpdatePizzaException;
 
-	boolean deletePizza(String codePizza);
+	boolean deletePizza(String codePizza) throws DeletePizzaException;
 
 }

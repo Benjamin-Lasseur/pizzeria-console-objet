@@ -1,11 +1,14 @@
 package dao_implementation;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
+import dao_api.IPizzaDao;
+import exception.DeletePizzaException;
+import exception.SavePizzaException;
+import exception.UpdatePizzaException;
 import model.CategoriePizza;
 import model.Pizza;
-import dao_api.IPizzaDao;
-
 
 /**Implementation de l'interface DAO de stockage des pizzas
  * @author ETY5
@@ -50,12 +53,16 @@ public class PizzaDaoImplementation implements IPizzaDao {
 	 * une pizza
 	 */
 	@Override
-	public boolean updatePizza(String codePizza, Pizza pizza) {
-		for (int i = 0; i < tabPizza.size(); i++) {
-			if (tabPizza.get(i).getCode().equals(codePizza)) {
-				tabPizza.set(i, pizza);
-				break;
-			}
+	public boolean updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
+		Optional<Pizza> opPizza = findPizza(codePizza);
+		if (opPizza.isPresent()) {
+			opPizza.get().setCategorie(pizza.getCategorie());
+			opPizza.get().setCode(pizza.getCode());
+			opPizza.get().setPrix(pizza.getPrix());
+			opPizza.get().setNom(pizza.getNom());
+			opPizza.get().setId(pizza.getId());
+		} else {
+			opPizza.orElseThrow(() -> new UpdatePizzaException("Ce code pizza n\'existe pas !"));
 		}
 		return false;
 	}
@@ -64,14 +71,18 @@ public class PizzaDaoImplementation implements IPizzaDao {
 	 * Méthode deletePizza(String codePizza) permettant de supprimer une pizza
 	 */
 	@Override
-	public boolean deletePizza(String codePizza) {
-		for (Pizza p : tabPizza) {
-			if (p.getCode().equals(codePizza)) {
-				tabPizza.remove(p);
-				break;
-			}
+	public boolean deletePizza(String codePizza) throws DeletePizzaException {
+		Optional<Pizza> opPizza = findPizza(codePizza);
+		if (opPizza.isPresent()) {
+			tabPizza.remove(opPizza.get());
+		} else {
+			opPizza.orElseThrow(() -> new DeletePizzaException("Ce code pizza n\'existe pas !"));
 		}
 		return false;
+	}
+
+	public Optional<Pizza> findPizza(String codePizza) {
+		return tabPizza.stream().filter(p -> p.getCode().equals(codePizza)).findFirst();
 	}
 
 }
