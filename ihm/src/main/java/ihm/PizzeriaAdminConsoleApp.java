@@ -4,12 +4,9 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
 
-
-
-import exception.*;
-
-
-import dao_implementation.*;
+import org.slf4j.*;
+import dao_implementation.PizzaDaoImplementation;
+import exception.StockageException;
 
 /**
  * Represente l'application controlant depuis la console
@@ -19,71 +16,56 @@ import dao_implementation.*;
  */
 public class PizzeriaAdminConsoleApp {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		/** Collection d'actions */
-		HashMap<Integer, OptionMenu> option = new HashMap<Integer, OptionMenu>();
-		/** Entier pour le choix de l'utilisateur */
-		int choix;
-		/** Création et remplissage du tableau de pizza */
-		PizzaDaoImplementation pizzaDao = new PizzaDaoImplementation();
-		/** Scanner pour les entrées clavier (avec séparateur décimal point) */
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
+	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaAdminConsoleApp.class);
+	/** Collection d'actions */
+	private HashMap<Integer, OptionMenu> option = new HashMap<>();
+	/** Entier pour le choix de l'utilisateur */
+	private int choix;
+	/** Création et remplissage du tableau de pizza */
+	private PizzaDaoImplementation pizzaDao = new PizzaDaoImplementation();
+	/** Scanner pour les entrées clavier (avec séparateur décimal point) */
+	private Scanner sc = new Scanner(System.in).useLocale(Locale.US);
+
+	public PizzeriaAdminConsoleApp() {
 		// Instanciation des classes de méthodes Suppression, Modification,
 		// Ajout et Listage
 		option.put(1, new ListerPizzasOptionMenu(sc, pizzaDao));
 		option.put(2, new AjouterPizzaOptionMenu(sc, pizzaDao));
-		option.put(3, new ModifierPizzaOptionMenu(sc, pizzaDao));
-		option.put(4, new SupprimerPizzaOptionMenu(sc, pizzaDao));
+		option.put(3, new ModifierPizzaOptionMenu(sc, pizzaDao, option.get(Integer.valueOf(1))));
+		option.put(4, new SupprimerPizzaOptionMenu(sc, pizzaDao, option.get(Integer.valueOf(1))));
+		executer();
+	}
+
+	public void executer() {
 		/** Boolean pour quitter l'application */
 		boolean continuer = true;
 		do {
 			/** Premier affichage du menu au lancement de l'application */
-			System.out.println("****Pizzeria Administration****");
-			System.out.println("1." + option.get(1).getLibelle());
-			System.out.println("2." + option.get(2).getLibelle());
-			System.out.println("3." + option.get(3).getLibelle());
-			System.out.println("4." + option.get(4).getLibelle());
-			System.out.println("99.Quitter");
+			afficherOptions();
 			choix = sc.nextInt();
-			try {
-				switch (choix) {
-				/** Choix 1: Afficher l'ensemble des pizzas */
-				case 1:
-					option.get(1).execute();
-					break;
-				/** Choix 2: Ajout d'une nouvelle pizza */
-				case 2:
-					option.get(2).execute();
-					break;
-				// Choix 3: Mise à jour d'une pizza
-				case 3:
-					System.out.println("Mise à jour d'une pizza");
-					option.get(1).execute();
-					option.get(3).execute();
-					break;
-				// Choix 4: Suppression d'une pizza
-				case 4:
-					System.out.println("Supression d'une pizza");
-					option.get(1).execute();
-					System.out.println("Quelle pizza voulez vous supprimer (Entrez le code ou 99 pour abandonner)?");
-					option.get(4).execute();
-					break;
-				/** Quitter le programme */
-				case 99:
-					System.out.println("Aurevoir \u2639");
-					continuer = false;
-					break;
-				/** Mauvaise entrée de l'utilisateur */
-				default:
-					System.out.println("Entrez un choix correct");
+			if (option.containsKey(Integer.valueOf(choix))) {
+				try {
+					option.get(Integer.valueOf(choix)).execute();
+				} catch (StockageException e) {
+					e.getMessage();
 				}
-			} catch (StockageException e) {
-				e.getMessage();
-				e.printStackTrace();
+			} else if (choix == 99) {
+				LOG.info("Aurevoir \u2639");
+				sc.close();
+				continuer = false;
+			} else {
+				LOG.info("Entrez un choix correct");
 			}
 		} while (continuer);
-		sc.close();
+
+	}
+
+	private void afficherOptions() {
+		LOG.info("****Pizzeria Administration****");
+		LOG.info("1." + option.get(1).getLibelle());
+		LOG.info("2." + option.get(2).getLibelle());
+		LOG.info("3." + option.get(3).getLibelle());
+		LOG.info("4." + option.get(4).getLibelle());
+		LOG.info("99.Quitter");
 	}
 }

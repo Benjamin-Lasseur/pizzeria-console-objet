@@ -1,11 +1,11 @@
 package dao_implementation;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import dao_api.IPizzaDao;
 import exception.DeletePizzaException;
-import exception.SavePizzaException;
 import exception.UpdatePizzaException;
 import model.CategoriePizza;
 import model.Pizza;
@@ -34,7 +34,7 @@ public class PizzaDaoImplementation implements IPizzaDao {
 
 	/** Méthode findAllPizza() retournant le tableau de pizzas */
 	@Override
-	public ArrayList<Pizza> findAllPizzas() {
+	public List<Pizza> findAllPizzas() {
 		return tabPizza;
 	}
 

@@ -18,6 +18,7 @@ public abstract class OptionMenu {
 	 */
 	protected Scanner sc;
 	protected IPizzaDao pizzaDao;
+	
 
 	public abstract boolean execute() throws StockageException;
 

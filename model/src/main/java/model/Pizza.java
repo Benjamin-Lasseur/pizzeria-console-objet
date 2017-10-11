@@ -1,4 +1,5 @@
 package model;
+
 import utils.*;
 
 /**
@@ -62,7 +63,6 @@ public class Pizza {
 	@Override
 	public String toString() {
 		return StringUtils.convert(this);
-		//return code + " -> "+ nom + " (" + prix +"€) "+categorie.getType();
 	}
 
 	/**

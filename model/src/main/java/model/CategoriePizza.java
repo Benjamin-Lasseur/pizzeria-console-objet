@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public enum CategoriePizza {
 	VIANDE("Viande"), POISSON("Poisson"), SANS_VIANDE("Sans viande");
 	private String type;
@@ -16,23 +18,13 @@ public enum CategoriePizza {
 	}
 
 	public static boolean exist(String type) {
-		boolean exist = false;
-		for (CategoriePizza existingType : CategoriePizza.values()) {
-			if (type.equals(existingType.getType())) {
-				exist = true;
-			}
-		}
-		return exist;
+		return Arrays.stream(CategoriePizza.values()).filter(typeExistant -> type.equals(typeExistant.getType()))
+				.findAny().isPresent();
 	}
-	
-	public static CategoriePizza returnCategorie(String categorie){
-		CategoriePizza returnedCategory=null;
-		for (CategoriePizza existingType : CategoriePizza.values()) {
-			if (categorie.equals(existingType.getType())) {
-				returnedCategory= existingType;
-			}
-		}
-		return returnedCategory;
+
+	public static CategoriePizza returnCategorie(String categorie) {
+		return Arrays.stream(CategoriePizza.values()).filter(typeExistant -> typeExistant.getType().equals(categorie))
+				.findFirst().get();
 	}
 
 }

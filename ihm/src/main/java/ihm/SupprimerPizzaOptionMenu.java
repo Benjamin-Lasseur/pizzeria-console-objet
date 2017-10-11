@@ -2,9 +2,10 @@ package ihm;
 
 import java.util.Scanner;
 
-import exception.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import model.*;
+import exception.*;
 
 import dao_api.*;
 
@@ -16,21 +17,25 @@ import dao_api.*;
  *
  */
 public class SupprimerPizzaOptionMenu extends OptionMenu {
+	private OptionMenu lPOM;
+	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaAdminConsoleApp.class);
 
 	// Construteur
-	public SupprimerPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao) {
+	public SupprimerPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao, OptionMenu lPOM) {
 		super(sc, pizzaDao);
-		// TODO Auto-generated constructor stub
+		this.lPOM = lPOM;
 	}
 
 	// Méthode execute() affichant les informations nécessaires à la suppression
 	// d'une pizza
 	@Override
 	public boolean execute() throws StockageException {
+		LOG.info("Supression d'une pizza");
+		lPOM.execute();
 		String code;
 		code = sc.next();
 		if ("99".equals(code)) {
-			System.out.println("Abandon");
+			LOG.info("Abandon");
 		} else {
 			pizzaDao.deletePizza(code);
 		}
