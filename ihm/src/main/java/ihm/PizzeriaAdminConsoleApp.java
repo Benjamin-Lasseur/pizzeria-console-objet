@@ -19,8 +19,6 @@ public class PizzeriaAdminConsoleApp {
 	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaAdminConsoleApp.class);
 	/** Collection d'actions */
 	private HashMap<Integer, OptionMenu> option = new HashMap<>();
-	/** Entier pour le choix de l'utilisateur */
-	private int choix;
 	/** Création et remplissage du tableau de pizza */
 	private PizzaDaoImplementation pizzaDao = new PizzaDaoImplementation();
 	/** Scanner pour les entrées clavier (avec séparateur décimal point) */
@@ -33,13 +31,15 @@ public class PizzeriaAdminConsoleApp {
 		option.put(2, new AjouterPizzaOptionMenu(sc, pizzaDao));
 		option.put(3, new ModifierPizzaOptionMenu(sc, pizzaDao, option.get(Integer.valueOf(1))));
 		option.put(4, new SupprimerPizzaOptionMenu(sc, pizzaDao, option.get(Integer.valueOf(1))));
+		option.put(99, new QuitterApplicationOptionMenu(sc, pizzaDao));
 		executer();
 	}
 
 	public void executer() {
-		/** Boolean pour quitter l'application */
+		/** Entier pour le choix de l'utilisateur */
+		int choix;
 		boolean continuer = true;
-		do {
+		while (continuer) {
 			/** Premier affichage du menu au lancement de l'application */
 			afficherOptions();
 			choix = sc.nextInt();
@@ -49,14 +49,10 @@ public class PizzeriaAdminConsoleApp {
 				} catch (StockageException e) {
 					e.getMessage();
 				}
-			} else if (choix == 99) {
-				LOG.info("Aurevoir \u2639");
-				sc.close();
-				continuer = false;
 			} else {
 				LOG.info("Entrez un choix correct");
 			}
-		} while (continuer);
+		}
 
 	}
 
@@ -66,6 +62,6 @@ public class PizzeriaAdminConsoleApp {
 		LOG.info("2." + option.get(2).getLibelle());
 		LOG.info("3." + option.get(3).getLibelle());
 		LOG.info("4." + option.get(4).getLibelle());
-		LOG.info("99.Quitter");
+		LOG.info("99." + option.get(99).getLibelle());
 	}
 }
