@@ -66,8 +66,7 @@ public class AppTest {
 		} catch (SavePizzaException e) {
 			LOG.debug(e.getMessage());
 		}
-		assert (pDI.findAllPizzas().size() == nbPizzaDebut + 1);
-		assertThat(pDI.findAllPizzas().size(), is(equals(nbPizzaDebut + 1)));
+		assertThat(pDI.findAllPizzas().size(), is(nbPizzaDebut + 1));
 	}
 
 	/**
