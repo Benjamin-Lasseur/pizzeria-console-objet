@@ -52,7 +52,7 @@ public class RequetesPizza {
 					String code = result.getString("CODE");
 					String nom = result.getString("NOM");
 					double prix = result.getDouble("PRIX");
-					CategoriePizza categorie = CategoriePizza.returnCategorie(result.getString("CATEGORIE"));
+					CategoriePizza categorie = CategoriePizza.returnCategorie(result.getInt("ID_CAT"));
 					pizzas.add(new Pizza(id, code, nom, prix, categorie));
 				}
 			}
@@ -169,7 +169,7 @@ public class RequetesPizza {
 				statement.setString(1, pizza.getCode());
 				statement.setString(2, pizza.getNom());
 				statement.setDouble(3, pizza.getPrix());
-				statement.setString(4, pizza.getCategorie().getType());
+				statement.setInt(4, pizza.getCategorie().getid());
 				statement.setString(5, codePizza);
 				statement.executeUpdate();
 				sucess = true;
@@ -215,7 +215,7 @@ public class RequetesPizza {
 				statement.setString(1, pizza.getCode());
 				statement.setString(2, pizza.getNom());
 				statement.setDouble(3, pizza.getPrix());
-				statement.setString(4, pizza.getCategorie().getType());
+				statement.setInt(4, pizza.getCategorie().getid());
 				statement.executeUpdate();
 				sucess = true;
 			}

@@ -27,7 +27,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 	 */
 	@Override
 	public boolean saveNewPizza(Pizza pizza) throws SavePizzaException {
-		return RequetesPizza.executeUpdate("INSERT INTO PIZZA(CODE, NOM, PRIX, CATEGORIE) VALUES (?,?,?,?)", pizza);
+		return RequetesPizza.executeUpdate("INSERT INTO PIZZA(CODE, NOM, PRIX, ID_CAT) VALUES (?,?,?,?)", pizza);
 	}
 
 	/*
@@ -37,7 +37,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 	 */
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
-		return RequetesPizza.executeUpdate("UPDATE PIZZA SET CODE=?, NOM=?, PRIX=?, CATEGORIE=? WHERE CODE=?", pizza,
+		return RequetesPizza.executeUpdate("UPDATE PIZZA SET CODE=?, NOM=?, PRIX=?, ID_CAT=? WHERE CODE=?", pizza,
 				codePizza);
 	}
 
