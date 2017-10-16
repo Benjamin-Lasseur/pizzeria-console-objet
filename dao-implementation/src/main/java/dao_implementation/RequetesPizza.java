@@ -57,28 +57,28 @@ public class RequetesPizza {
 				}
 			}
 		} catch (SQLException e) {
-			LOG.debug(e.getMessage());
+			LOG.error(e.getMessage(), e);
 		} finally {
 			try {
 				if (result != null) {
 					result.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(), e);
 			}
 			try {
 				if (statement != null) {
 					statement.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(), e);
 			}
 			try {
 				if (connection.isPresent()) {
 					connection.get().close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(), e);
 			}
 		}
 		return pizzas;
@@ -136,14 +136,14 @@ public class RequetesPizza {
 					statement.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(), e);
 			}
 			try {
 				if (connection.isPresent()) {
 					connection.get().close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(), e);
 			}
 		}
 		return sucess;
@@ -183,14 +183,14 @@ public class RequetesPizza {
 					statement.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(), e);
 			}
 			try {
 				if (connection.isPresent()) {
 					connection.get().close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(), e);
 			}
 		}
 		return sucess;
@@ -228,14 +228,14 @@ public class RequetesPizza {
 					statement.close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(), e);
 			}
 			try {
 				if (connection.isPresent()) {
 					connection.get().close();
 				}
 			} catch (SQLException e) {
-				LOG.error(e.getMessage());
+				LOG.error(e.getMessage(), e);
 			}
 		}
 		return sucess;

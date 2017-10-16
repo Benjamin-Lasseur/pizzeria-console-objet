@@ -61,7 +61,7 @@ public class PizzaDaoImplementation implements IPizzaDao {
 	 */
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
-		boolean returnBoolean;
+		boolean returnBoolean = false;
 		Optional<Pizza> opPizza = findPizza(codePizza);
 		if (opPizza.isPresent()) {
 			opPizza.get().setCategorie(pizza.getCategorie());
@@ -71,8 +71,8 @@ public class PizzaDaoImplementation implements IPizzaDao {
 			opPizza.get().setId(pizza.getId());
 			returnBoolean = true;
 		} else {
-			opPizza.orElseThrow(() -> new UpdatePizzaException("Ce code pizza n\'existe pas !"));
-			returnBoolean = false;
+			throw new UpdatePizzaException("Ce code pizza n\'existe pas !");
+
 		}
 		return returnBoolean;
 	}
@@ -82,14 +82,13 @@ public class PizzaDaoImplementation implements IPizzaDao {
 	 */
 	@Override
 	public boolean deletePizza(String codePizza) throws DeletePizzaException {
-		boolean returnBoolean;
+		boolean returnBoolean = false;
 		Optional<Pizza> opPizza = findPizza(codePizza);
 		if (opPizza.isPresent()) {
 			tabPizza.remove(opPizza.get());
 			returnBoolean = true;
 		} else {
-			returnBoolean = false;
-			opPizza.orElseThrow(() -> new DeletePizzaException("Ce code pizza n\'existe pas !"));
+			throw new DeletePizzaException("Ce code pizza n\'existe pas !");
 		}
 		return returnBoolean;
 	}

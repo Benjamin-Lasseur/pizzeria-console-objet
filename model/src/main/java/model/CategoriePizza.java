@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum CategoriePizza {
 	VIANDE("Viande"), POISSON("Poisson"), SANS_VIANDE("Sans viande");
@@ -23,8 +24,12 @@ public enum CategoriePizza {
 	}
 
 	public static CategoriePizza returnCategorie(String categorie) {
-		return Arrays.stream(CategoriePizza.values()).filter(typeExistant -> typeExistant.getType().equals(categorie))
-				.findFirst().get();
+		CategoriePizza cat = null;
+		Optional<CategoriePizza> opCat = Arrays.stream(CategoriePizza.values())
+				.filter(typeExistant -> typeExistant.getType().equals(categorie)).findFirst();
+		if (opCat.isPresent()) {
+			cat = opCat.get();
+		}
+		return cat;
 	}
-
 }

@@ -51,7 +51,7 @@ public class PizzeriaAdminConsoleApp {
 				try {
 					option.get(Integer.valueOf(choix)).execute();
 				} catch (StockageException e) {
-					e.getMessage();
+					LOG.error(e.getMessage(), e);
 				}
 			} else {
 				LOG.info("Entrez un choix correct");
