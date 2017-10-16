@@ -32,6 +32,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 	public boolean execute() throws StockageException {
 		LOG.info("Supression d'une pizza");
 		lPOM.execute();
+		LOG.info("Entrez le code de la pizza à supprimer (99 pour abandonner)");
 		String code;
 		code = sc.next();
 		if ("99".equals(code)) {

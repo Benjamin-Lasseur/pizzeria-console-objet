@@ -6,9 +6,13 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import dao_implementation.PizzaDaoImplementation;
+import dao_implementation.PizzaDaoJDBC;
 import exception.DeletePizzaException;
+import exception.SavePizzaException;
 import model.CategoriePizza;
 import model.Pizza;
 
@@ -16,6 +20,7 @@ import model.Pizza;
  * Unit test for simple App.
  */
 public class AppTest {
+	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoJDBC.class);
 
 	/**
 	 * Test non passant supprimant une pizza dont le code n'existe pas dans la
@@ -56,7 +61,11 @@ public class AppTest {
 		PizzaDaoImplementation pDI = new PizzaDaoImplementation();
 		int nbPizzaDebut = pDI.findAllPizzas().size();
 		Pizza p = new Pizza(code, nom, prix, categorie);
-		pDI.saveNewPizza(p);
+		try {
+			pDI.saveNewPizza(p);
+		} catch (SavePizzaException e) {
+			LOG.debug(e.getMessage());
+		}
 		assert (pDI.findAllPizzas().size() == nbPizzaDebut + 1);
 		assertThat(pDI.findAllPizzas().size(), is(equals(nbPizzaDebut + 1)));
 	}
@@ -68,7 +77,11 @@ public class AppTest {
 	public void testSavePizzaNonPassant() {
 		Pizza p = null;
 		PizzaDaoImplementation pDI = new PizzaDaoImplementation();
-		assertFalse(pDI.saveNewPizza(p));
+		try {
+			assertFalse(pDI.saveNewPizza(p));
+		} catch (SavePizzaException e) {
+			LOG.debug(e.getMessage());
+		}
 	}
 
 	/**

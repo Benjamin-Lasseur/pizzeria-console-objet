@@ -9,8 +9,6 @@ import utils.*;
  *
  */
 public class Pizza {
-	/** Index static permettant de donner un index unique aux pizzas */
-	static int indexId = 1;
 	/** Index de la pizza */
 	private int id;
 	/** Code de la pizza */
@@ -37,8 +35,14 @@ public class Pizza {
 	 *            prix
 	 */
 	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
-		this.id = Pizza.indexId;
-		Pizza.indexId++;
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		this.categorie = categorie;
+	}
+
+	public Pizza(int id, String code, String nom, double prix, CategoriePizza categorie) {
+		this.id = id;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;

@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
 
-import org.slf4j.*;
-import dao_implementation.PizzaDaoImplementation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import dao_api.IPizzaDao;
+import dao_implementation.PizzaDaoJDBC;
 import exception.StockageException;
 
 /**
@@ -20,7 +23,7 @@ public class PizzeriaAdminConsoleApp {
 	/** Collection d'actions */
 	private HashMap<Integer, OptionMenu> option = new HashMap<>();
 	/** Création et remplissage du tableau de pizza */
-	private PizzaDaoImplementation pizzaDao = new PizzaDaoImplementation();
+	private IPizzaDao pizzaDao = new PizzaDaoJDBC();
 	/** Scanner pour les entrées clavier (avec séparateur décimal point) */
 	private Scanner sc = new Scanner(System.in).useLocale(Locale.US);
 
@@ -31,6 +34,7 @@ public class PizzeriaAdminConsoleApp {
 		option.put(2, new AjouterPizzaOptionMenu(sc, pizzaDao));
 		option.put(3, new ModifierPizzaOptionMenu(sc, pizzaDao, option.get(Integer.valueOf(1))));
 		option.put(4, new SupprimerPizzaOptionMenu(sc, pizzaDao, option.get(Integer.valueOf(1))));
+		option.put(5, new InitialiserPizzaOptionMenu(sc, pizzaDao));
 		option.put(99, new QuitterApplicationOptionMenu(sc, pizzaDao));
 		executer();
 	}
@@ -62,6 +66,7 @@ public class PizzeriaAdminConsoleApp {
 		LOG.info("2." + option.get(2).getLibelle());
 		LOG.info("3." + option.get(3).getLibelle());
 		LOG.info("4." + option.get(4).getLibelle());
+		LOG.info("5." + option.get(5).getLibelle());
 		LOG.info("99." + option.get(99).getLibelle());
 	}
 }

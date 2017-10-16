@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import dao_api.IPizzaDao;
 import exception.DeletePizzaException;
+import exception.SavePizzaException;
 import exception.UpdatePizzaException;
 import model.CategoriePizza;
 import model.Pizza;
@@ -43,13 +44,15 @@ public class PizzaDaoImplementation implements IPizzaDao {
 	 * pizza dans le tableau
 	 */
 	@Override
-	public boolean saveNewPizza(Pizza pizza) {
+	public boolean saveNewPizza(Pizza pizza) throws SavePizzaException {
+		boolean sucess = false;
 		if (pizza == null) {
-			return false;
+			throw new SavePizzaException("Erreur lors de la sauvegarde de la pizza!");
 		} else {
 			tabPizza.add(pizza);
+			sucess = true;
 		}
-		return true;
+		return sucess;
 	}
 
 	/**
