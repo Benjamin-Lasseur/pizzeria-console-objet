@@ -8,5 +8,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ToString {
-	 boolean upperCase() default false;
+	/**
+	 * Constructeur de l'annotation ToString avec le champs upperCase
+	 * 
+	 * @return
+	 */
+	boolean upperCase() default false;
 }

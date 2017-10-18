@@ -49,4 +49,16 @@ public interface IPizzaDao {
 	 */
 	boolean deletePizza(String codePizza) throws DeletePizzaException;
 
+	/**
+	 * Fermeture de la connexion ou de la structure de stockage
+	 */
+	void close();
+
+	/**
+	 * Initialisation des pizzas
+	 * 
+	 * @param pizzas
+	 */
+	void initialiser(List<Pizza> pizzas);
+
 }

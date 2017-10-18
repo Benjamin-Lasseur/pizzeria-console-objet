@@ -6,12 +6,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class StringUtils {
+	/** LOG : Logger */
 	private static final Logger LOG = LoggerFactory.getLogger(StringUtils.class);
 
+	/**
+	 * Constructeur private pour ne pas instancier cette classe
+	 */
 	private StringUtils() {
 
 	}
 
+	/**
+	 * Retourne une String adaptée en fonction des annotations présentes sur les
+	 * attributs d'un objet
+	 * 
+	 * @param o
+	 * @return
+	 */
 	public static String convert(Object o) {
 		StringBuilder returnedString = new StringBuilder();
 		Class<?> classe = o.getClass();

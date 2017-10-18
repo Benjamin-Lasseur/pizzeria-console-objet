@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import dao_api.IPizzaDao;
-import dao_implementation.PizzaDaoJDBC;
+import dao_implementation.PizzaDaoJpa;
 import exception.StockageException;
 
 /**
@@ -23,7 +23,7 @@ public class PizzeriaAdminConsoleApp {
 	/** Collection d'actions */
 	private HashMap<Integer, OptionMenu> option = new HashMap<>();
 	/** Création et remplissage du tableau de pizza */
-	private IPizzaDao pizzaDao = new PizzaDaoJDBC();
+	private IPizzaDao pizzaDao = new PizzaDaoJpa();
 	/** Scanner pour les entrées clavier (avec séparateur décimal point) */
 	private Scanner sc = new Scanner(System.in).useLocale(Locale.US);
 

@@ -18,9 +18,13 @@ import model.Pizza;
 /** */
 public class PizzaDaoImplementation implements IPizzaDao {
 	/** Tableau stockant les pizzas */
+	/** tabPizza : ArrayList<Pizza> */
 	private ArrayList<Pizza> tabPizza = new ArrayList<>();
 
 	/** Constructeur de la DAO et ajout des pizzas initiales */
+	/**
+	 * 
+	 */
 	public PizzaDaoImplementation() {
 		super();
 		tabPizza.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
@@ -34,6 +38,11 @@ public class PizzaDaoImplementation implements IPizzaDao {
 	}
 
 	/** Méthode findAllPizza() retournant le tableau de pizzas */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao_api.IPizzaDao#findAllPizzas()
+	 */
 	@Override
 	public List<Pizza> findAllPizzas() {
 		return tabPizza;
@@ -42,6 +51,11 @@ public class PizzaDaoImplementation implements IPizzaDao {
 	/**
 	 * Méthode saveNewPizza(Pizza pizza) permettant de stocker une nouvelle
 	 * pizza dans le tableau
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao_api.IPizzaDao#saveNewPizza(model.Pizza)
 	 */
 	@Override
 	public boolean saveNewPizza(Pizza pizza) throws SavePizzaException {
@@ -58,6 +72,11 @@ public class PizzaDaoImplementation implements IPizzaDao {
 	/**
 	 * Méthode updatePizza(String codePizza, Pizza pizza) permettant de modifier
 	 * une pizza
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao_api.IPizzaDao#updatePizza(java.lang.String, model.Pizza)
 	 */
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
@@ -80,6 +99,11 @@ public class PizzaDaoImplementation implements IPizzaDao {
 	/**
 	 * Méthode deletePizza(String codePizza) permettant de supprimer une pizza
 	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao_api.IPizzaDao#deletePizza(java.lang.String)
+	 */
 	@Override
 	public boolean deletePizza(String codePizza) throws DeletePizzaException {
 		boolean returnBoolean = false;
@@ -93,8 +117,34 @@ public class PizzaDaoImplementation implements IPizzaDao {
 		return returnBoolean;
 	}
 
+	/**
+	 * @param codePizza
+	 * @return
+	 */
 	public Optional<Pizza> findPizza(String codePizza) {
 		return tabPizza.stream().filter(p -> p.getCode().equals(codePizza)).findFirst();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao_api.IPizzaDao#close()
+	 */
+	@Override
+	public void close() {
+		tabPizza.clear();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see dao_api.IPizzaDao#initialiser(java.util.List)
+	 */
+	@Override
+	public void initialiser(List<Pizza> pizzas) {
+		tabPizza.clear();
+		pizzas.stream().forEach(p -> tabPizza.add(p));
+
 	}
 
 }

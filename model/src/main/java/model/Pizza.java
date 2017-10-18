@@ -1,6 +1,9 @@
 package model;
 
-import utils.*;
+import javax.persistence.*;
+
+import utils.StringUtils;
+import utils.ToString;
 
 /**
  * Classe définissant une pizza
@@ -8,21 +11,37 @@ import utils.*;
  * @author ETY5
  *
  */
+@Entity
+@Table(name = "pizza")
 public class Pizza {
 	/** Index de la pizza */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	/** Code de la pizza */
 	@ToString
+	@Column(name = "CODE")
 	private String code;
 	/** Nom de la pizza */
 	@ToString(upperCase = true)
+	@Column(name = "NOM")
 	private String nom;
 	/** Prix de la pizza */
 	@ToString
+	@Column(name = "PRIX")
 	private double prix;
 	/** Categorie de la pizza */
 	@ToString
+	@Column(name = "CATEGORIE")
+	@Enumerated(EnumType.STRING)
 	private CategoriePizza categorie;
+
+	/**
+	 * Constructeur d'hibernate
+	 */
+	public Pizza() {
+		super();
+	}
 
 	/**
 	 * Constructeur
@@ -41,6 +60,20 @@ public class Pizza {
 		this.categorie = categorie;
 	}
 
+	/**
+	 * Constructeur
+	 * 
+	 * @param id
+	 *            id
+	 * @param code
+	 *            code
+	 * @param nom
+	 *            nom
+	 * @param prix
+	 *            prix
+	 * @param categorie
+	 *            categorie
+	 */
 	public Pizza(int id, String code, String nom, double prix, CategoriePizza categorie) {
 		this.id = id;
 		this.code = code;
@@ -64,6 +97,11 @@ public class Pizza {
 		this.id = id;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return StringUtils.convert(this);
