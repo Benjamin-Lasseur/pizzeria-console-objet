@@ -1,13 +1,9 @@
 package ihm;
 
-import java.util.Scanner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import exception.*;
-
-import dao_api.*;
+import exception.StockageException;
 
 /**
  * Classe SupprimerPizzaOptionMenu étendant la classe OptionMenu Elle permet
@@ -16,14 +12,12 @@ import dao_api.*;
  * @author ETY5
  *
  */
+@Controller
 public class SupprimerPizzaOptionMenu extends OptionMenu {
-	private OptionMenu lPOM;
-	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaAdminConsoleApp.class);
-
+	@Autowired
+	private ListerPizzasOptionMenu lPOM;
 	// Construteur
-	public SupprimerPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao, OptionMenu lPOM) {
-		super(sc, pizzaDao);
-		this.lPOM = lPOM;
+	public SupprimerPizzaOptionMenu() {
 	}
 
 	// Méthode execute() affichant les informations nécessaires à la suppression
@@ -40,7 +34,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 		} else {
 			pizzaDao.deletePizza(code);
 		}
-		return false;
+		return true;
 	}
 
 	// Méthode retournant le nom de l'option

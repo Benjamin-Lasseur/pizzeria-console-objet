@@ -1,11 +1,8 @@
 package ihm;
 
-import java.util.Scanner;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
-import dao_api.*;
 
 /**
  * Classe ListerPizzaOptionMenu étendant la classe OptionMenu Elle permet
@@ -14,12 +11,11 @@ import dao_api.*;
  * @author ETY5
  *
  */
+@Controller
 public class ListerPizzasOptionMenu extends OptionMenu {
-	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaAdminConsoleApp.class);
-
 	// Construteur
-	public ListerPizzasOptionMenu(Scanner sc, IPizzaDao pizzaDao) {
-		super(sc, pizzaDao);
+	public ListerPizzasOptionMenu() {
+
 	}
 
 	// Méthode execute() affichant les pizzas
@@ -27,7 +23,7 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 	public boolean execute() {
 		LOG.info("Liste des pizzas");
 		pizzaDao.findAllPizzas().stream().forEach(p -> LOG.info(p.toString()));
-		return false;
+		return true;
 	}
 
 	// Méthode retournant le nom de l'option

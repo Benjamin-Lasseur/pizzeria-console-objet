@@ -1,14 +1,17 @@
 package ihm;
 
 import java.util.HashMap;
-import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
 
-import dao_api.IPizzaDao;
-import dao_implementation.PizzaDaoJpa;
 import exception.StockageException;
 
 /**
@@ -17,26 +20,29 @@ import exception.StockageException;
  * @author ETY5
  *
  */
+@Service
 public class PizzeriaAdminConsoleApp {
 
-	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaAdminConsoleApp.class);
-	/** Collection d'actions */
-	private HashMap<Integer, OptionMenu> option = new HashMap<>();
-	/** Création et remplissage du tableau de pizza */
-	private IPizzaDao pizzaDao = new PizzaDaoJpa();
-	/** Scanner pour les entrées clavier (avec séparateur décimal point) */
-	private Scanner sc = new Scanner(System.in).useLocale(Locale.US);
+	@Autowired
+	private ApplicationContext context;
+
+	@Autowired
+	private Logger LOG;
+
+	@Autowired
+	private Scanner sc;
+
+	private Map<Integer, OptionMenu> options = new HashMap<>();
+
+	@PostConstruct
+	public void init() {
+		AtomicInteger increment = new AtomicInteger(0);
+		context.getBeansOfType(OptionMenu.class).values().forEach(o -> options.put(increment.incrementAndGet(), o));
+		executer();
+	}
 
 	public PizzeriaAdminConsoleApp() {
-		// Instanciation des classes de méthodes Suppression, Modification,
-		// Ajout et Listage
-		option.put(1, new ListerPizzasOptionMenu(sc, pizzaDao));
-		option.put(2, new AjouterPizzaOptionMenu(sc, pizzaDao));
-		option.put(3, new ModifierPizzaOptionMenu(sc, pizzaDao, option.get(Integer.valueOf(1))));
-		option.put(4, new SupprimerPizzaOptionMenu(sc, pizzaDao, option.get(Integer.valueOf(1))));
-		option.put(5, new InitialiserPizzaOptionMenu(sc, pizzaDao));
-		option.put(99, new QuitterApplicationOptionMenu(sc, pizzaDao));
-		executer();
+		
 	}
 
 	public void executer() {
@@ -47,9 +53,9 @@ public class PizzeriaAdminConsoleApp {
 			/** Premier affichage du menu au lancement de l'application */
 			afficherOptions();
 			choix = sc.nextInt();
-			if (option.containsKey(Integer.valueOf(choix))) {
+			if (options.containsKey(Integer.valueOf(choix))) {
 				try {
-					option.get(Integer.valueOf(choix)).execute();
+					continuer = options.get(Integer.valueOf(choix)).execute();
 				} catch (StockageException e) {
 					LOG.error(e.getMessage(), e);
 				}
@@ -62,11 +68,8 @@ public class PizzeriaAdminConsoleApp {
 
 	private void afficherOptions() {
 		LOG.info("****Pizzeria Administration****");
-		LOG.info("1." + option.get(1).getLibelle());
-		LOG.info("2." + option.get(2).getLibelle());
-		LOG.info("3." + option.get(3).getLibelle());
-		LOG.info("4." + option.get(4).getLibelle());
-		LOG.info("5." + option.get(5).getLibelle());
-		LOG.info("99." + option.get(99).getLibelle());
+		AtomicInteger increment = new AtomicInteger(0);
+		options.values().forEach((o) -> LOG.info(increment.incrementAndGet() + "." + o.getLibelle()));
+
 	}
 }

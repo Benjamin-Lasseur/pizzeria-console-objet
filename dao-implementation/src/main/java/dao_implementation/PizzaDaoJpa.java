@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import dao_api.IPizzaDao;
 import exception.DeletePizzaException;
@@ -12,10 +14,12 @@ import exception.SavePizzaException;
 import exception.UpdatePizzaException;
 import model.Pizza;
 
+@Repository
 public class PizzaDaoJpa implements IPizzaDao {
 
 	/** emf : EntityManagerFactory */
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_essai");
+	@Autowired
+	EntityManagerFactory emf;
 	/** em : EntityManager */
 	EntityManager em;
 
@@ -139,6 +143,34 @@ public class PizzaDaoJpa implements IPizzaDao {
 		em.getTransaction().commit();
 		closeEm();
 
+	}
+
+	/**
+	 * @return the emf
+	 */
+	public EntityManagerFactory getEmf() {
+		return emf;
+	}
+
+	/**
+	 * @param emf the emf to set
+	 */
+	public void setEmf(EntityManagerFactory emf) {
+		this.emf = emf;
+	}
+
+	/**
+	 * @return the em
+	 */
+	public EntityManager getEm() {
+		return em;
+	}
+
+	/**
+	 * @param em the em to set
+	 */
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
 
 }

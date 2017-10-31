@@ -2,6 +2,8 @@ package dao_api;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import exception.DeletePizzaException;
 import exception.SavePizzaException;
 import exception.UpdatePizzaException;
@@ -13,6 +15,7 @@ import model.Pizza;
  * @author ETY5
  *
  */
+
 public interface IPizzaDao {
 
 	/**

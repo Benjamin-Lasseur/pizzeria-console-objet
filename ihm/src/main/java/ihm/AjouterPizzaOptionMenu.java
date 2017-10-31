@@ -1,15 +1,10 @@
 package ihm;
 
-import java.util.Scanner;
+import org.springframework.stereotype.Controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import exception.*;
-
-import model.*;
-
-import dao_api.*;
+import exception.SavePizzaException;
+import model.CategoriePizza;
+import model.Pizza;
 
 /**
  * Classe AjouterPizzaOptionMenu étendant la classe OptionMenu Elle permet
@@ -18,12 +13,15 @@ import dao_api.*;
  * @author ETY5
  *
  */
-public class AjouterPizzaOptionMenu extends OptionMenu {
-	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaAdminConsoleApp.class);
 
+@Controller
+public class AjouterPizzaOptionMenu extends OptionMenu {
+
+
+	
 	// Construteur
-	public AjouterPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao) {
-		super(sc, pizzaDao);
+	public AjouterPizzaOptionMenu() {
+
 	}
 
 	// Méthode execute() affichant les informations nécessaires à l'ajout d'une
@@ -53,7 +51,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 
 		Pizza p = new Pizza(code, nom, prix, CategoriePizza.returnCategorie(categorie));
 		pizzaDao.saveNewPizza(p);
-		return false;
+		return true;
 	}
 
 	// Méthode retournant le nom de l'option

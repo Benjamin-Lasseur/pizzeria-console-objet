@@ -1,5 +1,8 @@
 package exec;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import config.Config;
 import ihm.PizzeriaAdminConsoleApp;
 
 public class Launcher {
@@ -9,6 +12,8 @@ public class Launcher {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new PizzeriaAdminConsoleApp();
+		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class)){
+		context.getBean(PizzeriaAdminConsoleApp.class);
+		}
 	}
 }

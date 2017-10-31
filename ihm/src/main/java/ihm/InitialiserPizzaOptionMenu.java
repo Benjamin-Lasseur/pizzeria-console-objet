@@ -2,13 +2,14 @@ package ihm;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-import dao_api.IPizzaDao;
+import org.springframework.stereotype.Controller;
+
 import exception.StockageException;
 import model.CategoriePizza;
 import model.Pizza;
 
+@Controller
 public class InitialiserPizzaOptionMenu extends OptionMenu {
 
 	/** tabPizzaInit : List<Pizza> */
@@ -20,8 +21,8 @@ public class InitialiserPizzaOptionMenu extends OptionMenu {
 	 * @param sc
 	 * @param pizzaDao
 	 */
-	public InitialiserPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao) {
-		super(sc, pizzaDao);
+	public InitialiserPizzaOptionMenu() {
+
 	}
 
 	/*
@@ -40,7 +41,7 @@ public class InitialiserPizzaOptionMenu extends OptionMenu {
 		tabPizzaInit.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.POISSON));
 		tabPizzaInit.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.POISSON));
 		pizzaDao.initialiser(tabPizzaInit);
-		return false;
+		return true;
 	}
 
 	/*
