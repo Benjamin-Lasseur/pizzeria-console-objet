@@ -18,10 +18,15 @@ import model.Pizza;
 public class PizzaDaoJpa implements IPizzaDao {
 
 	/** emf : EntityManagerFactory */
-	@Autowired
+
 	EntityManagerFactory emf;
 	/** em : EntityManager */
 	EntityManager em;
+
+	@Autowired
+	public PizzaDaoJpa(EntityManagerFactory emf) {
+		this.emf = emf;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -153,7 +158,8 @@ public class PizzaDaoJpa implements IPizzaDao {
 	}
 
 	/**
-	 * @param emf the emf to set
+	 * @param emf
+	 *            the emf to set
 	 */
 	public void setEmf(EntityManagerFactory emf) {
 		this.emf = emf;
@@ -167,7 +173,8 @@ public class PizzaDaoJpa implements IPizzaDao {
 	}
 
 	/**
-	 * @param em the em to set
+	 * @param em
+	 *            the em to set
 	 */
 	public void setEm(EntityManager em) {
 		this.em = em;

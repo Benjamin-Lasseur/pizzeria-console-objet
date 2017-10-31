@@ -23,13 +23,10 @@ import exception.StockageException;
 @Service
 public class PizzeriaAdminConsoleApp {
 
-	@Autowired
 	private ApplicationContext context;
 
-	@Autowired
 	private Logger LOG;
 
-	@Autowired
 	private Scanner sc;
 
 	private Map<Integer, OptionMenu> options = new HashMap<>();
@@ -41,8 +38,11 @@ public class PizzeriaAdminConsoleApp {
 		executer();
 	}
 
-	public PizzeriaAdminConsoleApp() {
-		
+	@Autowired
+	public PizzeriaAdminConsoleApp(ApplicationContext context, Logger LOG, Scanner sc) {
+		this.context = context;
+		this.LOG = LOG;
+		this.sc = sc;
 	}
 
 	public void executer() {

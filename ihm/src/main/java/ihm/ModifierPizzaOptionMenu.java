@@ -1,8 +1,12 @@
 package ihm;
 
+import java.util.Scanner;
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dao_api.IPizzaDao;
 import exception.StockageException;
 import model.CategoriePizza;
 import model.Pizza;
@@ -17,12 +21,13 @@ import model.Pizza;
 @Service
 public class ModifierPizzaOptionMenu extends OptionMenu {
 
-	@Autowired
 	private ListerPizzasOptionMenu lPOM;
 
 	// Construteur
-	public ModifierPizzaOptionMenu() {
-	
+	@Autowired
+	public ModifierPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao, Logger LOG, ListerPizzasOptionMenu lPOM) {
+		super(sc, pizzaDao, LOG);
+		this.lPOM = lPOM;
 	}
 
 	// Méthode execute() affichant les informations nécessaires à la

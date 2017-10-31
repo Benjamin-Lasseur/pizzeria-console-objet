@@ -1,8 +1,12 @@
 package ihm;
 
+import java.util.Scanner;
+
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import dao_api.IPizzaDao;
 import exception.StockageException;
 
 /**
@@ -14,10 +18,14 @@ import exception.StockageException;
  */
 @Controller
 public class SupprimerPizzaOptionMenu extends OptionMenu {
-	@Autowired
+
 	private ListerPizzasOptionMenu lPOM;
+
 	// Construteur
-	public SupprimerPizzaOptionMenu() {
+	@Autowired
+	public SupprimerPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao, Logger LOG, ListerPizzasOptionMenu lPOM) {
+		super(sc, pizzaDao, LOG);
+		this.lPOM = lPOM;
 	}
 
 	// Méthode execute() affichant les informations nécessaires à la suppression

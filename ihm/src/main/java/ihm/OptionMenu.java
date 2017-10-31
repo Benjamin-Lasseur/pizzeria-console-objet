@@ -20,16 +20,18 @@ public abstract class OptionMenu {
 	 * Scanner sc Scanner d'entrée clavier PizzaDaoImplementation pizzaDao DAO
 	 * de stockage des pizzas
 	 */
-	@Autowired
+
 	protected Scanner sc;
-	@Autowired
+
 	protected IPizzaDao pizzaDao;
-	@Autowired
+	
 	protected Logger LOG;
 
 	// Construteur abstrait appelé depuis les classes filles
-	public OptionMenu() {
-	
+	public OptionMenu(Scanner sc, IPizzaDao pizzaDao, Logger LOG) {
+		this.sc = sc;
+		this.pizzaDao = pizzaDao;
+		this.LOG = LOG;
 	}
 
 	public abstract boolean execute() throws StockageException;

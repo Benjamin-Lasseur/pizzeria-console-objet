@@ -2,9 +2,13 @@ package ihm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import dao_api.IPizzaDao;
 import exception.StockageException;
 import model.CategoriePizza;
 import model.Pizza;
@@ -21,7 +25,9 @@ public class InitialiserPizzaOptionMenu extends OptionMenu {
 	 * @param sc
 	 * @param pizzaDao
 	 */
-	public InitialiserPizzaOptionMenu() {
+	@Autowired
+	public InitialiserPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao, Logger LOG) {
+		super(sc,pizzaDao,LOG);
 
 	}
 

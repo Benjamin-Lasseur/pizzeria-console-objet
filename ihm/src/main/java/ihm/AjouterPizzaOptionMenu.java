@@ -1,7 +1,12 @@
 package ihm;
 
+import java.util.Scanner;
+
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import dao_api.IPizzaDao;
 import exception.SavePizzaException;
 import model.CategoriePizza;
 import model.Pizza;
@@ -20,8 +25,9 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 
 	
 	// Construteur
-	public AjouterPizzaOptionMenu() {
-
+	@Autowired
+	public AjouterPizzaOptionMenu(Scanner sc, IPizzaDao pizzaDao, Logger LOG) {
+		super(sc,pizzaDao,LOG);
 	}
 
 	// Méthode execute() affichant les informations nécessaires à l'ajout d'une

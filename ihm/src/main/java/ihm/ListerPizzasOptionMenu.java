@@ -1,7 +1,13 @@
 package ihm;
 
 
+import java.util.Scanner;
+
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import dao_api.IPizzaDao;
 
 
 /**
@@ -14,7 +20,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ListerPizzasOptionMenu extends OptionMenu {
 	// Construteur
-	public ListerPizzasOptionMenu() {
+	@Autowired
+	public ListerPizzasOptionMenu(Scanner sc, IPizzaDao pizzaDao, Logger LOG) {
+		super(sc,pizzaDao,LOG);
 
 	}
 
