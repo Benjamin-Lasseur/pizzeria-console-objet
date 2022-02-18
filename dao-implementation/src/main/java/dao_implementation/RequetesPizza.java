@@ -127,7 +127,7 @@ public class RequetesPizza {
 				statement.executeUpdate();
 				sucess = true;
 			}
-		} catch (SQLException e) {
+		} catch (SQLException e) { 
 			LOG.debug(e.getMessage());
 			throw new DeletePizzaException("Erreur lors de la suppression de la pizza!");
 		} finally {
