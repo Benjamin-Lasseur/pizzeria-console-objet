@@ -48,6 +48,6 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 	// Méthode retournant le nom de l'option
 	@Override
 	public String getLibelle() {
-		return "Supprimer une pizza";
+		return "Supprimer une pizza"; 
 	}
 }
